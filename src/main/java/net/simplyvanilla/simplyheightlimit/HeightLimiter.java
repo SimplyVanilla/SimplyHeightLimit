@@ -34,6 +34,8 @@ public class HeightLimiter {
 
         if (height > maxHeight) {
             var newLoc = new Location( loc.getWorld(), loc.getBlockX(), maxHeight, loc.getBlockZ());
+            newLoc.setYaw(loc.getYaw());
+            newLoc.setPitch(loc.getPitch());
 
             //Going back to sync to access bukkit APIs
             Bukkit.getScheduler().runTask(this.plugin, () -> {
@@ -41,6 +43,7 @@ public class HeightLimiter {
                 p.teleport(newLoc);
                 p.setFlying(false);
                 p.damage(this.damage);
+                p.setGliding(false);
             });
         }
     }
