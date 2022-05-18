@@ -1,0 +1,6 @@
+#The maximum height for players to be at
+limit: 256
+#The damage players should take when they are too high (2.0 <=> 1 Heart)
+damage: 0.5
+#The interval, in seconds, at which the server should check for the players' positions.
+interval: 3.0
