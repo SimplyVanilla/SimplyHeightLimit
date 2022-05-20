@@ -1,4 +1,4 @@
-# SimplyHeight
+# SimplyHeightLimit
 
 A plugin that regularly checks for the players' positions.
 
