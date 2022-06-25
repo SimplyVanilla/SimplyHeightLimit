@@ -2,7 +2,7 @@ name: SimplyHeightLimit
 description: Limit Fly Height.
 version: @version@
 main: net.simplyvanilla.simplyheightlimit.SimplyHeightLimit
-api-version: 1.18
+api-version: 1.19
 
 author: Simply Vanilla
 website: https://github.com/SimplyVanilla/SimplyHeightLimit
