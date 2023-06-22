@@ -1,61 +1,57 @@
 package net.simplyvanilla.simplyheightlimit;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.logging.Level;
 
 public final class SimplyHeightLimit extends JavaPlugin {
 
-  private FileConfiguration config;
+    private FileConfiguration config;
 
-  @Override
-  public void onEnable() {
+    @Override
+    public void onEnable() {
 
-    initConfig();
-    initLimiter();
-  }
-
-  @Override
-  public void onDisable() {
-    // Plugin shutdown logic
-  }
-
-  private void initLimiter() {
-    HeightLimiter limiter;
-
-    int maxHeight = config.getInt("limit");
-    double damage = config.getDouble("damage");
-    double intervalSeconds = config.getDouble("interval");
-
-    int intervalTicks = (int) (20.0 * intervalSeconds); // Converting seconds to ticks
-
-    limiter = new HeightLimiter(maxHeight, intervalTicks, damage, this);
-    limiter.startAsyncChecking();
-  }
-
-  private void initConfig() {
-    this.config = loadConfig();
-  }
-
-  private FileConfiguration loadConfig() {
-    File dataFolder = getDataFolder();
-
-    if (!dataFolder.exists()) {
-      dataFolder.mkdirs();
+        initConfig();
+        initLimiter();
     }
 
-    File configFile = new File(dataFolder, "config.yml");
-
-    if (!configFile.exists()) {
-      this.saveResource("config.yml", false);
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
     }
 
-    return YamlConfiguration.loadConfiguration(configFile);
-  }
+    private void initLimiter() {
+        HeightLimiter limiter;
+
+        int maxHeight = config.getInt("limit");
+        double damage = config.getDouble("damage");
+        double intervalSeconds = config.getDouble("interval");
+
+        int intervalTicks = (int) (20.0 * intervalSeconds); // Converting seconds to ticks
+
+        limiter = new HeightLimiter(maxHeight, intervalTicks, damage, this);
+        limiter.startAsyncChecking();
+    }
+
+    private void initConfig() {
+        this.config = loadConfig();
+    }
+
+    private FileConfiguration loadConfig() {
+        File dataFolder = getDataFolder();
+
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+
+        File configFile = new File(dataFolder, "config.yml");
+
+        if (!configFile.exists()) {
+            this.saveResource("config.yml", false);
+        }
+
+        return YamlConfiguration.loadConfiguration(configFile);
+    }
 }
