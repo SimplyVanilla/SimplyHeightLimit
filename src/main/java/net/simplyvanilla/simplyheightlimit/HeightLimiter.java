@@ -41,7 +41,7 @@ public class HeightLimiter {
             Runnable adjustPlayerTask = () -> {
                 p.sendMessage(
                     MiniMessage.miniMessage().deserialize("<red>You are too high!"));
-                p.teleport(newLoc);
+                p.teleportAsync(newLoc);
                 p.setFlying(false);
                 p.damage(this.damage);
                 p.setGliding(false);
