@@ -62,7 +62,7 @@ public class HeightLimiter {
     public void startAsyncChecking() {
         if (SimplyHeightLimit.isFolia()) {
             Bukkit.getGlobalRegionScheduler()
-                .runAtFixedRate(this.plugin, scheduledTask -> this.checkHeightOnAll(), 0,
+                .runAtFixedRate(this.plugin, scheduledTask -> this.checkHeightOnAll(), 1L,
                     this.period);
         } else {
             Bukkit.getScheduler()
