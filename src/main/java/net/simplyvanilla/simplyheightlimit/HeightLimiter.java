@@ -38,21 +38,35 @@ public class HeightLimiter {
             newLoc.setPitch(loc.getPitch());
 
             // Going back to sync to access bukkit APIs
-            Bukkit.getScheduler()
-                .runTask(
-                    this.plugin,
-                    () -> {
-                        p.sendMessage(MiniMessage.miniMessage().deserialize("<red>You are too high!"));
-                        p.teleport(newLoc);
-                        p.setFlying(false);
-                        p.damage(this.damage);
-                        p.setGliding(false);
-                    });
+            Runnable adjustPlayerTask = () -> {
+                p.sendMessage(
+                    MiniMessage.miniMessage().deserialize("<red>You are too high!"));
+                p.teleport(newLoc);
+                p.setFlying(false);
+                p.damage(this.damage);
+                p.setGliding(false);
+            };
+
+            if (SimplyHeightLimit.isFolia()) {
+                p.getScheduler().run(this.plugin, scheduledTask -> adjustPlayerTask.run(), () -> {
+                });
+            } else {
+                Bukkit.getScheduler()
+                    .runTask(
+                        this.plugin,
+                        adjustPlayerTask);
+            }
         }
     }
 
     public void startAsyncChecking() {
-        Bukkit.getScheduler()
-            .runTaskTimerAsynchronously(this.plugin, this::checkHeightOnAll, 0, this.period);
+        if (SimplyHeightLimit.isFolia()) {
+            Bukkit.getGlobalRegionScheduler()
+                .runAtFixedRate(this.plugin, scheduledTask -> this.checkHeightOnAll(), 0,
+                    this.period);
+        } else {
+            Bukkit.getScheduler()
+                .runTaskTimerAsynchronously(this.plugin, this::checkHeightOnAll, 0, this.period);
+        }
     }
 }
