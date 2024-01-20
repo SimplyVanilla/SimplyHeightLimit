@@ -3,6 +3,7 @@ description: Limit Fly Height.
 version: @version@
 main: net.simplyvanilla.simplyheightlimit.SimplyHeightLimit
 api-version: 1.19
+folia-supported: true
 
 author: Simply Vanilla
 website: https://github.com/SimplyVanilla/SimplyHeightLimit

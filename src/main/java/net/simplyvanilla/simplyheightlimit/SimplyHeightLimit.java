@@ -54,4 +54,14 @@ public final class SimplyHeightLimit extends JavaPlugin {
 
         return YamlConfiguration.loadConfiguration(configFile);
     }
+
+    public static boolean isFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
 }
